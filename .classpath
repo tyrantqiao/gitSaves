@@ -9,5 +9,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/huangxiuyang696955/Downloads/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/huangxiuyang696955/Downloads/mysql-connector-java-5.0.8-bin.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
