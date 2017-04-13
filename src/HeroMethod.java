@@ -13,8 +13,12 @@ public class HeroMethod {
 		int total = 0;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
 
-			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/how2java?characterEncoding=UTF-8",
+			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qiaoJava?characterEncoding=UTF-8",
 					"root", "admin");
 
 			Statement s = c.createStatement();
@@ -32,9 +36,6 @@ public class HeroMethod {
 
 			c.close();
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,11 +44,14 @@ public class HeroMethod {
 	}
 
 	public void add(Hero hero) {
-
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
 
-			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/how2java?characterEncoding=UTF-8",
+			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qiaoJava?characterEncoding=UTF-8",
 					"root", "admin");
 
 			String sql = "insert into hero values(null,?,?,?)";
@@ -60,17 +64,14 @@ public class HeroMethod {
 
 			ResultSet rs = ps.getGeneratedKeys();
 			if (rs.next()) {
-				int id = rs.getInt(1);
-				hero.id = id;
+				int Id = rs.getInt(1);
+				hero.Id = Id;
 			}
 
 			ps.close();
 
 			c.close();
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,16 +81,20 @@ public class HeroMethod {
 	public void update(Hero hero) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
 
-			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/how2java?characterEncoding=UTF-8",
+			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qiaoJava?characterEncoding=UTF-8",
 					"root", "admin");
 
-			String sql = "update hero set name= ?, hp = ? , damage = ? where id = ?";
+			String sql = "update hero set name= ?, hp = ? , damage = ? where Id = ?";
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setString(1, hero.name);
 			ps.setFloat(2, hero.hp);
 			ps.setInt(3, hero.damage);
-			ps.setInt(4, hero.id);
+			ps.setInt(4, hero.Id);
 
 			ps.execute();
 
@@ -97,9 +102,6 @@ public class HeroMethod {
 
 			c.close();
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,16 +109,20 @@ public class HeroMethod {
 
 	}
 
-	public void delete(int id) {
+	public void delete(int Id) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
 
-			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/how2java?characterEncoding=UTF-8",
+			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qiaoJava?characterEncoding=UTF-8",
 					"root", "admin");
 
 			Statement s = c.createStatement();
 
-			String sql = "delete from hero where id = " + id;
+			String sql = "delete from hero where Id = " + Id;
 
 			s.execute(sql);
 
@@ -124,26 +130,28 @@ public class HeroMethod {
 
 			c.close();
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public Hero get(int id) {
+	public Hero get(int Id) {
 		Hero hero = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 
-			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/how2java?characterEncoding=UTF-8",
+		try {
+
+			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qiaoJava?characterEncoding=UTF-8",
 					"root", "admin");
 
 			Statement s = c.createStatement();
 
-			String sql = "select * from hero where id = " + id;
+			String sql = "select * from hero where Id = " + Id;
 
 			ResultSet rs = s.executeQuery(sql);
 
@@ -155,16 +163,13 @@ public class HeroMethod {
 				hero.name = name;
 				hero.hp = hp;
 				hero.damage = damage;
-				hero.id = id;
+				hero.Id = Id;
 			}
 
 			s.close();
 
 			c.close();
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -181,12 +186,17 @@ public class HeroMethod {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 
-			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/how2java?characterEncoding=UTF-8",
+		try {
+
+			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qiaoJava?characterEncoding=UTF-8",
 					"root", "admin");
+			String sql = "select * from hero order by Id desc limit ?,? ";
 
-			String sql = "select * from hero order by id desc limit ?,? ";
-
+			System.out.println(c.getAutoCommit());
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setInt(1, start);
 			ps.setInt(2, count);
@@ -195,11 +205,11 @@ public class HeroMethod {
 
 			while (rs.next()) {
 				Hero hero = new Hero();
-				int id = rs.getInt(1);
+				int Id = rs.getInt(1);
 				String name = rs.getString(2);
 				float hp = rs.getFloat("hp");
 				int damage = rs.getInt(4);
-				hero.id = id;
+				hero.Id = Id;
 				hero.name = name;
 				hero.hp = hp;
 				hero.damage = damage;
@@ -210,9 +220,6 @@ public class HeroMethod {
 
 			c.close();
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

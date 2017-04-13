@@ -6,13 +6,13 @@
 	</description>
 	
 	<servlet>
-		<servlet-name>list11<servlet-name>
-		<servlet-class>EditHeroServlet<servlet-class>
+		<servlet-name>list11</servlet-name>
+		<servlet-class>EditHeroServlet</servlet-class>
 	</servlet>
 		
 	<servlet-mapping>
-		<servlet-name>list11<servlet-name>
-		<url-pattern>/list<url-pattern>	
+		<servlet-name>list11</servlet-name>
+		<url-pattern>/list</url-pattern>	
 	</servlet-mapping>
 	
     <servlet>

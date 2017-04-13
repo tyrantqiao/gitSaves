@@ -1,7 +1,7 @@
 
 public class Hero {
 	String name;
-	int id;
+	int Id;
 	float hp;
 	int damage;
 }
