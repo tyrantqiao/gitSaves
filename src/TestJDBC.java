@@ -1,5 +1,15 @@
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestJDBC.
+ */
 public class TestJDBC {
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 
 		// ³õÊ¼»¯Çý¶¯

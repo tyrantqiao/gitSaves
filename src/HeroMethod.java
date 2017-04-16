@@ -7,8 +7,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HeroMethod.
+ */
 public class HeroMethod {
 
+	/**
+	 * Gets the total.
+	 *
+	 * @return the total
+	 */
 	public int getTotal() {
 		int total = 0;
 		try {
@@ -18,8 +27,8 @@ public class HeroMethod {
 		}
 		try {
 
-			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qiaoJava?characterEncoding=UTF-8",
-					"root", "admin");
+			Connection c = DriverManager
+					.getConnection("jdbc:mysql://127.0.0.1:3306/qiaodatabase?characterEncoding=UTF-8", "root", "admin");
 
 			Statement s = c.createStatement();
 
@@ -43,6 +52,12 @@ public class HeroMethod {
 		return total;
 	}
 
+	/**
+	 * Adds the.
+	 *
+	 * @param hero
+	 *            the hero
+	 */
 	public void add(Hero hero) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -51,21 +66,21 @@ public class HeroMethod {
 		}
 		try {
 
-			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qiaoJava?characterEncoding=UTF-8",
-					"root", "admin");
+			Connection c = DriverManager
+					.getConnection("jdbc:mysql://127.0.0.1:3306/qiaodatabase?characterEncoding=UTF-8", "root", "admin");
 
 			String sql = "insert into hero values(null,?,?,?)";
 			PreparedStatement ps = c.prepareStatement(sql);
-			ps.setString(1, hero.name);
-			ps.setFloat(2, hero.hp);
-			ps.setInt(3, hero.damage);
+			ps.setString(1, hero.getName());
+			ps.setFloat(2, hero.getHp());
+			ps.setInt(3, hero.getDamage());
 
 			ps.execute();
 
 			ResultSet rs = ps.getGeneratedKeys();
 			if (rs.next()) {
-				int Id = rs.getInt(1);
-				hero.Id = Id;
+				int id = rs.getInt(1);
+				hero.setId(id);
 			}
 
 			ps.close();
@@ -78,6 +93,12 @@ public class HeroMethod {
 		}
 	}
 
+	/**
+	 * Update.
+	 *
+	 * @param hero
+	 *            the hero
+	 */
 	public void update(Hero hero) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -86,15 +107,15 @@ public class HeroMethod {
 		}
 		try {
 
-			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qiaoJava?characterEncoding=UTF-8",
-					"root", "admin");
+			Connection c = DriverManager
+					.getConnection("jdbc:mysql://127.0.0.1:3306/qiaodatabase?characterEncoding=UTF-8", "root", "admin");
 
-			String sql = "update hero set name= ?, hp = ? , damage = ? where Id = ?";
+			String sql = "update hero set name= ?, hp = ? , damage = ? where id = ?";
 			PreparedStatement ps = c.prepareStatement(sql);
-			ps.setString(1, hero.name);
-			ps.setFloat(2, hero.hp);
-			ps.setInt(3, hero.damage);
-			ps.setInt(4, hero.Id);
+			ps.setString(1, hero.getName());
+			ps.setFloat(2, hero.getHp());
+			ps.setInt(3, hero.getDamage());
+			ps.setInt(4, hero.getId());
 
 			ps.execute();
 
@@ -109,7 +130,13 @@ public class HeroMethod {
 
 	}
 
-	public void delete(int Id) {
+	/**
+	 * Delete.
+	 *
+	 * @param id
+	 *            the id
+	 */
+	public void delete(int id) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -117,12 +144,12 @@ public class HeroMethod {
 		}
 		try {
 
-			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qiaoJava?characterEncoding=UTF-8",
-					"root", "admin");
+			Connection c = DriverManager
+					.getConnection("jdbc:mysql://127.0.0.1:3306/qiaodatabase?characterEncoding=UTF-8", "root", "admin");
 
 			Statement s = c.createStatement();
 
-			String sql = "delete from hero where Id = " + Id;
+			String sql = "delete from hero where id = " + id;
 
 			s.execute(sql);
 
@@ -136,7 +163,14 @@ public class HeroMethod {
 		}
 	}
 
-	public Hero get(int Id) {
+	/**
+	 * Gets the.
+	 *
+	 * @param id
+	 *            the id
+	 * @return the hero
+	 */
+	public Hero get(int id) {
 		Hero hero = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -146,12 +180,12 @@ public class HeroMethod {
 
 		try {
 
-			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qiaoJava?characterEncoding=UTF-8",
-					"root", "admin");
+			Connection c = DriverManager
+					.getConnection("jdbc:mysql://127.0.0.1:3306/qiaodatabase?characterEncoding=UTF-8", "root", "admin");
 
 			Statement s = c.createStatement();
 
-			String sql = "select * from hero where Id = " + Id;
+			String sql = "select * from hero where id = " + id;
 
 			ResultSet rs = s.executeQuery(sql);
 
@@ -160,10 +194,10 @@ public class HeroMethod {
 				String name = rs.getString(2);
 				float hp = rs.getFloat("hp");
 				int damage = rs.getInt(4);
-				hero.name = name;
-				hero.hp = hp;
-				hero.damage = damage;
-				hero.Id = Id;
+				hero.setName(name);
+				hero.setHp(hp);
+				hero.setDamage(damage);
+				hero.setId(id);
 			}
 
 			s.close();
@@ -177,10 +211,24 @@ public class HeroMethod {
 		return hero;
 	}
 
+	/**
+	 * List.
+	 *
+	 * @return the list
+	 */
 	public List<Hero> list() {
 		return list(0, Short.MAX_VALUE);
 	}
 
+	/**
+	 * List.
+	 *
+	 * @param start
+	 *            the start
+	 * @param count
+	 *            the count
+	 * @return the list
+	 */
 	public List<Hero> list(int start, int count) {
 		List<Hero> heros = new ArrayList<Hero>();
 
@@ -192,11 +240,10 @@ public class HeroMethod {
 
 		try {
 
-			Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qiaoJava?characterEncoding=UTF-8",
-					"root", "admin");
-			String sql = "select * from hero order by Id desc limit ?,? ";
+			Connection c = DriverManager
+					.getConnection("jdbc:mysql://127.0.0.1:3306/qiaodatabase?characterEncoding=UTF-8", "root", "admin");
+			String sql = "select * from hero limit ?,? ";
 
-			System.out.println(c.getAutoCommit());
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setInt(1, start);
 			ps.setInt(2, count);
@@ -205,14 +252,14 @@ public class HeroMethod {
 
 			while (rs.next()) {
 				Hero hero = new Hero();
-				int Id = rs.getInt(1);
+				int id = rs.getInt(1);
 				String name = rs.getString(2);
 				float hp = rs.getFloat("hp");
 				int damage = rs.getInt(4);
-				hero.Id = Id;
-				hero.name = name;
-				hero.hp = hp;
-				hero.damage = damage;
+				hero.setId(id);
+				hero.setName(name);
+				hero.setHp(hp);
+				hero.setDamage(damage);
 				heros.add(hero);
 			}
 

@@ -9,12 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LoginServlet.
+ */
 public class LoginServlet extends HttpServlet {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#service(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
