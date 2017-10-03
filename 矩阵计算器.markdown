@@ -1,0 +1,7 @@
+---
+title: detMatrix
+date: 2017-04-06 21:31:50
+tags:
+---
+a page to calculate matrix's value,and there 's another page to calculate matrixs' multiplication
+{% link 'det matrix's value' https://tyrantqiao.github.io/matrix target='_blank' %}
